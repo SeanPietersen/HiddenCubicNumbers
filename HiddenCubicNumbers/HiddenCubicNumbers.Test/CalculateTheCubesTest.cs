@@ -58,5 +58,23 @@ namespace HiddenCubicNumbers.Test
             //Assert
             Assert.Equal(expected, actual);
         }
+        
+        [Fact]
+        public void SumOfCubesTest4()
+        {
+            //Arrange
+            ICalculateTheCubes calculateTheCube = new CalculateTheCubes();
+
+            string s = "153000153407000407";
+
+            string expected = "153 0 153 407 0 407 1120 Lucky";
+
+            //Act
+
+            var actual = calculateTheCube.isSumOfCubes(s);
+
+            //Assert
+            Assert.Equal(expected, actual);
+        }
     }
 }

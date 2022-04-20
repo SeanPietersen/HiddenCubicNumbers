@@ -8,51 +8,31 @@ namespace HiddenCubicNumbers.App
     {
         public string isSumOfCubes(string s)
         {
-            String[] subString = Regex.Split(s, @"\D");
-            String[] numbers = subString.Where(x => !string.IsNullOrEmpty(x)).ToArray();
+            var subString = Regex.Matches(s, @"\d{1,3}").ToArray();
             string result = null;
             double sum = 0;
             double totalSum = 0;
 
-            foreach (var number in numbers)
+            foreach (var match in subString)
             {
-                if(number.Length > 3)
+                foreach (var digit in match.Value)
                 {
-                    for (int i = 0; i < number.Length; i += 3)
-                    {
-                        var threeDigitNumber =  number.Substring(i, Math.Min(3, number.Length - i));
-
-                        char[] threeDigitNumberDigits = threeDigitNumber.ToCharArray();
-
-                        foreach (var digit in threeDigitNumberDigits)
-                        {
-                            sum += Math.Pow(Char.GetNumericValue(digit), 3);
-                        }
-
-                        if(sum == Convert.ToDouble(threeDigitNumber))
-                        {
-                            result += $"{threeDigitNumber} ";
-                            totalSum += sum;
-                        }
-                        sum = 0;
-                    }
+                    sum += Math.Pow(Char.GetNumericValue(digit), 3);
                 }
-                else
+
+                if (sum == Convert.ToDouble(match.Value))
                 {
-                    char[] digits = number.ToCharArray();
-
-                    foreach (var digit in digits)
+                    if (sum == 0)
                     {
-                        sum += Math.Pow(Char.GetNumericValue(digit), 3);
+                        result += $"0 ";
                     }
-
-                    if (sum == Convert.ToDouble(number))
+                    else
                     {
-                        result += $"{number} ";
-                        totalSum += sum;
+                        result += $"{match} ";
                     }
-                    sum = 0;
-                }                
+                    totalSum += sum;
+                }
+                sum = 0;            
             }
 
             if(!String.IsNullOrEmpty(result))
