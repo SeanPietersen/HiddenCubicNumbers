@@ -1,4 +1,4 @@
-using System;
+using HiddenCubicNumbers.App;
 using Xunit;
 
 namespace HiddenCubicNumbers.Test
@@ -12,7 +12,7 @@ namespace HiddenCubicNumbers.Test
             ICalculateTheCubes calculateTheCube = new CalculateTheCubes();
 
             string s = "0 9026315 -827&()";
-            
+
             string expected = "0 0 Lucky";
 
             //Act
@@ -22,7 +22,7 @@ namespace HiddenCubicNumbers.Test
             //Assert
             Assert.Equal(expected, actual);
         }
-        
+
         [Fact]
         public void SumOfCubesTest2()
         {
